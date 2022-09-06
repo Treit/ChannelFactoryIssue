@@ -3,18 +3,23 @@ using System.ServiceModel;
 
 namespace Test
 {
-    interface ISomeInterface
+    public interface ISomeInterface
     {
         public void DoSomething();
     }
 
     public sealed class TestClass : IDisposable
     {
-        private readonly ChannelFactory<ISomeInterface> channelFactory;
+        private readonly ChannelFactory<ISomeInterface> _channelFactory;
+
+        public TestClass(ChannelFactory<ISomeInterface> factory)
+        {
+            _channelFactory = factory;
+        }
 
         public void Dispose()
         {
-            channelFactory.Dispose();
+            _channelFactory.Dispose();
         }
     }
 }
